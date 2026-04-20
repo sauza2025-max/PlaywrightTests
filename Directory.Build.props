@@ -1,0 +1,11 @@
+<Project>
+  <!--
+    Copies allureConfig.json to bin/Debug/net8.0/ so Allure finds it
+    next to the test DLL at runtime. Without this, Allure can't locate
+    its config and silently skips writing allure-results/.
+  -->
+  <ItemGroup>
+    <None Include="allureConfig.json" CopyToOutputDirectory="Always" />
+    <None Include=".runsettings" CopyToOutputDirectory="Always" />
+  </ItemGroup>
+</Project>

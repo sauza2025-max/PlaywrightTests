@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <NUnit>
+    <!--
+      NumberOfTestWorkers=1 → run ALL tests sequentially (one at a time)
+      This prevents Selenium from opening 10+ Chrome windows simultaneously.
+    -->
+    <NumberOfTestWorkers>1</NumberOfTestWorkers>
+    <Extensions>
+      <Add>Allure.NUnit.AllureNUnitExtension</Add>
+    </Extensions>
+  </NUnit>
+
+  <!--
+    ResultsDirectory → where dotnet test writes .trx files (project root)
+    This also sets the working directory for test output files.
+  -->
+  <RunConfiguration>
+    <ResultsDirectory>.\TestResults</ResultsDirectory>
+  </RunConfiguration>
+
+  <AllureConfiguration>
+    <Directory>allure-results</Directory>
+  </AllureConfiguration>
+
+	<RunConfiguration>
+		<EnvironmentVariables>
+			<TestSessionTimeout>120000</TestSessionTimeout>
+			<PLAYWRIGHT_HTML_REPORT>playwright-report</PLAYWRIGHT_HTML_REPORT>
+			<PLAYWRIGHT_JUNIT_OUTPUT_NAME>playwright-results.xml</PLAYWRIGHT_JUNIT_OUTPUT_NAME>
+		</EnvironmentVariables>
+	</RunConfiguration>
+	
+</RunSettings>
+

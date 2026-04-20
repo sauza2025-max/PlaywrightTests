@@ -1,0 +1,4 @@
+✅ Browser started: Login_WithValidCredentials_ShouldSucceed
+✅ Browser started: Login_WithValidCredentials_ShouldSucceed
+📸 Screenshot saved: C:\Users\FE\Downloads\c#playwright\bin\Debug\net8.0\screenshot_FAILED_20260420_164258.png
+🔚 Browser closed: Login_WithValidCredentials_ShouldSucceed
