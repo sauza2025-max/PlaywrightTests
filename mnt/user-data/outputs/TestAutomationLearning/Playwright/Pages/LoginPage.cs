@@ -35,6 +35,7 @@ public class LoginPage
 
     public async Task LoginAsync(string username, string password)
     {
+        await UsernameInput.WaitForAsync();
         await UsernameInput.FillAsync(username);
         await PasswordInput.FillAsync(password);
         await LoginButton.ClickAsync();

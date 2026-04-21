@@ -31,7 +31,7 @@ public class AdvancedSeleniumTests : BaseTest
 
     // ✅ TEST 1: Dropdowns
     [Test]
-    [AllureTag("playwright")]
+    [AllureTag("selenium")]
     public void Dropdown_ShouldSelectOptionByText()
     {
         Driver.Navigate().GoToUrl($"{BaseUrl}/dropdown");
@@ -53,7 +53,7 @@ public class AdvancedSeleniumTests : BaseTest
 
     // ✅ TEST 2: JavaScript Alert
     [Test]
-    [AllureTag("playwright")]
+    [AllureTag("selenium")]
     public void Alert_ShouldAcceptJsAlert()
     {
         Driver.Navigate().GoToUrl($"{BaseUrl}/javascript_alerts");
@@ -72,7 +72,7 @@ public class AdvancedSeleniumTests : BaseTest
 
     // ✅ TEST 3: Confirm dialog - dismiss
     [Test]
-    [AllureTag("playwright")]
+    [AllureTag("selenium")]
     public void Alert_ShouldDismissConfirmDialog()
     {
         Driver.Navigate().GoToUrl($"{BaseUrl}/javascript_alerts");
@@ -113,7 +113,7 @@ public class AdvancedSeleniumTests : BaseTest
 
     // ✅ TEST 5: Keyboard actions
     [Test]
-    [AllureTag("playwright")]
+    [AllureTag("selenium")]
     public void Keyboard_ShouldUseKeyboardShortcuts()
     {
         Driver.Navigate().GoToUrl($"{BaseUrl}/key_presses");
@@ -130,7 +130,7 @@ public class AdvancedSeleniumTests : BaseTest
 
     // ✅ TEST 6: Mouse hover (Actions class)
     [Test]
-    [AllureTag("playwright")]
+    [AllureTag("selenium")]
     public void Mouse_ShouldHoverOverElement()
     {
         Driver.Navigate().GoToUrl($"{BaseUrl}/hovers");
@@ -147,7 +147,7 @@ public class AdvancedSeleniumTests : BaseTest
 
     // ✅ TEST 7: JavaScript Executor
     [Test]
-    [AllureTag("playwright")]
+    [AllureTag("selenium")]
     public void JavaScript_ShouldExecuteScript()
     {
         Driver.Navigate().GoToUrl($"{BaseUrl}/large");
@@ -170,7 +170,7 @@ public class AdvancedSeleniumTests : BaseTest
 
     // ✅ TEST 8: Explicit Wait - dynamic content
     [Test]
-    [AllureTag("playwright")]
+    [AllureTag("selenium")]
     public void Wait_ShouldWaitForDynamicElement()
     {
         Driver.Navigate().GoToUrl($"{BaseUrl}/dynamic_loading/1");
@@ -191,7 +191,7 @@ public class AdvancedSeleniumTests : BaseTest
 
     // ✅ TEST 9: Multiple windows/tabs
     [Test]
-    [AllureTag("playwright")]
+    [AllureTag("selenium")]
     public void Windows_ShouldHandleMultipleTabs()
     {
         Driver.Navigate().GoToUrl($"{BaseUrl}/windows");
