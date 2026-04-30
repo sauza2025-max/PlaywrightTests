@@ -2,8 +2,8 @@ using Allure.NUnit;
 using Allure.NUnit.Attributes;
 using FluentAssertions;
 using NUnit.Framework;
-using PlaywrightTests.Pages;
-using PlaywrightTests.Utils;
+using SeleniumTests.Pages;
+using Utils;
 
 namespace SeleniumTests.Tests;
 

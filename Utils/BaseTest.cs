@@ -1,4 +1,3 @@
-using Allure.NUnit;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -8,7 +7,7 @@ using System.IO;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
-namespace PlaywrightTests.Utils;
+namespace Utils;
 
 /// <summary>
 /// 📚 BASE TEST CLASS - All Selenium tests inherit from this
