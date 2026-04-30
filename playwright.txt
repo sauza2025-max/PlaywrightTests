@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<RunConfiguration>
+		<TestSessionTimeout>120000</TestSessionTimeout>
+		<ResultsDirectory>./TestResults</ResultsDirectory>
+		<EnvironmentVariables>
+			<PLAYWRIGHT_BROWSERS_PATH>C:\playwright-cache</PLAYWRIGHT_BROWSERS_PATH>
+			<PLAYWRIGHT_HTML_REPORT>playwright-report</PLAYWRIGHT_HTML_REPORT>
+			<PLAYWRIGHT_JUNIT_OUTPUT_NAME>playwright-results.xml</PLAYWRIGHT_JUNIT_OUTPUT_NAME>
+		</EnvironmentVariables>
+	</RunConfiguration>
+	<NUnit>
+		<NumberOfTestWorkers>1</NumberOfTestWorkers>
+		<Extensions>
+			<Add>Allure.NUnit.AllureNUnitExtension</Add>
+		</Extensions>
+	</NUnit>
+	<AllureConfiguration>
+		<Directory>allure-results</Directory>
+	</AllureConfiguration>
+	<Playwright>
+		<BrowserName>chromium</BrowserName>
+		<LaunchOptions>
+			<Headless>true</Headless>
+			<!-- false locally, true for Jenkins -->
+			<Args>--no-sandbox --disable-dev-shm-usage</Args>
+		</LaunchOptions>
+	</Playwright>
+</RunSettings>

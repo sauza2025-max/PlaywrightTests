@@ -2,7 +2,6 @@ using Allure.Net.Commons;
 using Allure.NUnit;
 using AngleSharp.Dom;
 using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using System;
@@ -46,6 +45,25 @@ public abstract class BasePlaywrightTest
     public void GlobalSetup()
     {
         TestEnvironment.WriteEnvironmentProperties("Chrome/Playwright");
+    }
+
+    [OneTimeSetUp]
+    public void WriteAllureEnvironment()
+    {
+        var resultsDir = "allure-results";
+        Directory.CreateDirectory(resultsDir);
+
+        var lines = new[]
+        {
+        $"Environment={Environment.GetEnvironmentVariable("TEST_ENV") ?? "QA"}",
+        $"Browser={Environment.GetEnvironmentVariable("BROWSER") ?? "Chrome"}",
+        $"OS={Environment.OSVersion}",
+        $"DotNet={Environment.Version}",
+        $"BuildNumber={Environment.GetEnvironmentVariable("BUILD_NUMBER") ?? "local"}",
+        $"Branch={Environment.GetEnvironmentVariable("GIT_BRANCH") ?? "unknown"}"
+    };
+
+        File.WriteAllLines(Path.Combine(resultsDir, "environment.properties"), lines);
     }
 
     [SetUp]

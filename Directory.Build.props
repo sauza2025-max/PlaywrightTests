@@ -6,6 +6,6 @@
   -->
   <ItemGroup>
     <None Include="allureConfig.json" CopyToOutputDirectory="Always" />
-    <None Include=".runsettings" CopyToOutputDirectory="Always" />
+  
   </ItemGroup>
 </Project>

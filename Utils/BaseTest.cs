@@ -123,4 +123,23 @@ public class BaseTest
         TestEnvironment.WriteEnvironmentProperties("Chrome/Selenium");    // BaseTest
     }
 
+    [OneTimeSetUp]
+    public void WriteAllureEnvironment()
+    {
+        var resultsDir = "allure-results";
+        Directory.CreateDirectory(resultsDir);
+
+        var lines = new[]
+        {
+        $"Environment={Environment.GetEnvironmentVariable("TEST_ENV") ?? "QA"}",
+        $"Browser={Environment.GetEnvironmentVariable("BROWSER") ?? "Chrome"}",
+        $"OS={Environment.OSVersion}",
+        $"DotNet={Environment.Version}",
+        $"BuildNumber={Environment.GetEnvironmentVariable("BUILD_NUMBER") ?? "local"}",
+        $"Branch={Environment.GetEnvironmentVariable("GIT_BRANCH") ?? "unknown"}"
+    };
+
+        File.WriteAllLines(Path.Combine(resultsDir, "environment.properties"), lines);
+    }
+
 }
