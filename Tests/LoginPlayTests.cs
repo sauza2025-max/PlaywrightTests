@@ -21,7 +21,7 @@ namespace PlaywrightTests.Tests;
 /// Playwright: await page.Locator("#x").ClickAsync();
 /// </summary>
 [TestFixture]
-[AllureSuite("PlaywrightTests")]
+[AllureSuite("PlaywrightTest")]
 [Category("Login")]
 [AllureNUnit]
 public class LoginPlayTests : BasePlaywrightTest

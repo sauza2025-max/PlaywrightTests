@@ -28,7 +28,7 @@ namespace PlaywrightTests.Tests;
 /// - Much faster test execution
 /// </summary>
 [TestFixture]
-[AllureSuite("playwright")]
+[AllureSuite("PlaywrightTest")]
 [Category("Login")]
 [AllureNUnit]// ← Must be on the concrete fixture class for Allure to capture results
 public class AdvancedPlaywrightTests : BasePlaywrightTest
