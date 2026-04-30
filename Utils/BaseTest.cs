@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager.Helpers;
 
 namespace Utils;
 
@@ -30,7 +31,11 @@ public class BaseTest
     [SetUp]
     public void Setup()
     {
-        new DriverManager().SetUpDriver(new ChromeConfig());
+        // ✅ fix — matches ChromeDriver to whatever Chrome is installed
+        new DriverManager().SetUpDriver(
+            new ChromeConfig(),
+            VersionResolveStrategy.MatchingBrowser
+        );
 
         var options = new ChromeOptions();
         options.AddArgument("--start-maximized");
