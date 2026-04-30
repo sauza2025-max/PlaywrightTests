@@ -48,7 +48,7 @@ public abstract class BasePlaywrightTest
         TestEnvironment.WriteEnvironmentProperties("Chrome/Playwright");
     }
 
-    [SetUp]                                           // ✅ runs per test, async
+    [SetUp]
     public async Task BeforeTest()
     {
         Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
@@ -57,8 +57,9 @@ public abstract class BasePlaywrightTest
             Headless = true,
             Args = new[] { "--no-sandbox", "--disable-dev-shm-usage" }
         });
-        Page = await Browser.NewPageAsync();
-        await Page.SetViewportSizeAsync(1920, 1080);
+
+        Context = await Browser.NewContextAsync();   // ✅ must be before Page
+        Page = await Context.NewPageAsync();       // ✅ Page from Context not Browser
         await Page.GotoAsync(url);
     }
 
