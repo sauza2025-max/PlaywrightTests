@@ -24,8 +24,8 @@ namespace SeleniumTests.Tests;
 /// TEST SITE: https://the-internet.herokuapp.com/
 /// </summary>
 [TestFixture]
-[Category("Advanced")]
-[AllureNUnit]  // ← Must be on the concrete fixture class for Allure to capture results
+[AllureSuite("SeleniumTest")]
+[Category("Login")]
 public class AdvancedSeleniumTests : BaseTest
 {
     private const string BaseUrl = "https://the-internet.herokuapp.com";

@@ -1,0 +1,3 @@
+✅ Browser started: Wait_ShouldWaitForDynamicElement
+✅ Dynamic element loaded successfully
+🔚 Browser closed: Wait_ShouldWaitForDynamicElement

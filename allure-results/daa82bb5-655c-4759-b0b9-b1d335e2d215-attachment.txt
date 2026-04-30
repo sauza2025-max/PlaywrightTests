@@ -1,0 +1,2 @@
+✅ Browser started: Windows_ShouldHandleMultipleTabs
+🔚 Browser closed: Windows_ShouldHandleMultipleTabs

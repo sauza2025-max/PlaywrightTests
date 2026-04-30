@@ -1,0 +1,3 @@
+✅ Browser started: Login_WithInvalidPassword_ShouldShowError
+📸 Screenshot saved: C:\Users\FE\Downloads\c#playwright\bin\Release\net8.0\screenshot_FAILED_20260429_200035.png
+🔚 Browser closed: Login_WithInvalidPassword_ShouldShowError

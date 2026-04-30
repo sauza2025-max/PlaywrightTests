@@ -1,0 +1,2 @@
+✅ Browser started: Alert_ShouldDismissConfirmDialog
+🔚 Browser closed: Alert_ShouldDismissConfirmDialog

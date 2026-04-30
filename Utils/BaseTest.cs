@@ -1,3 +1,4 @@
+using Allure.NUnit;
 using AngleSharp.Dom;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -25,6 +26,7 @@ namespace Utils;
 /// - ImplicitWait        → Global wait on every FindElement call
 /// </summary>
 [NonParallelizable]  // ← CRITICAL: run Selenium tests sequentially, one browser at a time
+[AllureNUnit]
 public class BaseTest
 {
     protected IWebDriver Driver = null!;
@@ -58,6 +60,14 @@ public class BaseTest
         Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
 
         Console.WriteLine($"✅ Browser started: {TestContext.CurrentContext.Test.Name}");
+    }
+
+    [TearDown]
+    public void AfterTest()
+    {
+        Driver?.Quit();
+        Driver?.Dispose();
+        Driver = null;
     }
 
     [TearDown]

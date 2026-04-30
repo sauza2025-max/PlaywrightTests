@@ -1,0 +1,3 @@
+✅ Browser started: IFrame_ShouldSwitchAndInteract
+📸 Screenshot saved: C:\Users\FE\Downloads\c#playwright\bin\Release\net8.0\screenshot_FAILED_20260429_200007.png
+🔚 Browser closed: IFrame_ShouldSwitchAndInteract

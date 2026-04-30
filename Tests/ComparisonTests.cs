@@ -19,7 +19,6 @@ namespace PlaywrightTests.Tests;
 [TestFixture]
 [AllureSuite("PlaywrightTest")]
 [Category("Login")]
-[AllureNUnit] // ← Must be on the concrete fixture class for Allure to capture results
 public class ComparisonTests : BasePlaywrightTest
 {
     /*
@@ -71,7 +70,7 @@ public class ComparisonTests : BasePlaywrightTest
         await Page.ClickAsync("#submit");
 
         // 4. Assert with auto-retry built in
-        await Expect(Page.Locator(".post-title"))
+        await Assertions.Expect(Page.Locator(".post-title"))
             .ToContainTextAsync("Logged In Successfully");
 
         System.Console.WriteLine("✅ Playwright test passed");
@@ -109,10 +108,10 @@ public class ComparisonTests : BasePlaywrightTest
         var submitByXpath   = Page.Locator("//button[@id='submit']");
 
         // All of these point to the same elements
-        await Expect(usernameByLabel).ToBeVisibleAsync();
-        await Expect(submitByRole).ToBeVisibleAsync();
-        await Expect(submitByCss).ToBeVisibleAsync();
-        await Expect(submitByXpath).ToBeVisibleAsync();
+        await Assertions.Expect(usernameByLabel).ToBeVisibleAsync();
+        await Assertions.Expect(submitByRole).ToBeVisibleAsync();
+        await Assertions.Expect(submitByCss).ToBeVisibleAsync();
+        await Assertions.Expect(submitByXpath).ToBeVisibleAsync();
 
         System.Console.WriteLine("✅ All locator strategies work");
     }

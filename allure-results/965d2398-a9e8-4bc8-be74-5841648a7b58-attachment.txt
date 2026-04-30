@@ -1,0 +1,3 @@
+✅ Browser started: Login_WithMissingFields_ShouldShowError("","Password123","username")
+📸 Screenshot saved: C:\Users\FE\Downloads\c#playwright\bin\Release\net8.0\screenshot_FAILED_20260429_200039.png
+🔚 Browser closed: Login_WithMissingFields_ShouldShowError("","Password123","username")

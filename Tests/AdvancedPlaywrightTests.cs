@@ -6,6 +6,7 @@ using NUnit.Framework;
 using PlaywrightTests.Utils;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Playwright;  // ✅ brings in Assertions
 
 namespace PlaywrightTests.Tests;
 
@@ -30,7 +31,6 @@ namespace PlaywrightTests.Tests;
 [TestFixture]
 [AllureSuite("PlaywrightTest")]
 [Category("Login")]
-[AllureNUnit]// ← Must be on the concrete fixture class for Allure to capture results
 public class AdvancedPlaywrightTests : BasePlaywrightTest
 {
     // ✅ TEST 1: Network interception - mock API response
@@ -66,22 +66,21 @@ public class AdvancedPlaywrightTests : BasePlaywrightTest
         await Page.GotoAsync("https://playwright.dev",
             new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded, Timeout = 60_000 });
 
-        // Full page screenshot
         await Page.ScreenshotAsync(new PageScreenshotOptions
         {
-            Path     = "fullpage.png",
+            Path = "fullpage.png",
             FullPage = true
         });
 
-        // Screenshot of specific element — use nav which is always present on playwright.dev
         var nav = Page.Locator("nav").First;
-        await Expect(nav).ToBeVisibleAsync();
+        await Assertions.Expect(nav).ToBeVisibleAsync();   // ✅ direct call, no ambiguity
+
         await nav.ScreenshotAsync(new LocatorScreenshotOptions
         {
             Path = "header.png"
         });
 
-        System.Console.WriteLine("✅ Screenshots captured");
+        Console.WriteLine("✅ Screenshots captured");
     }
 
     // ✅ TEST 3: Keyboard shortcuts
@@ -93,20 +92,20 @@ public class AdvancedPlaywrightTests : BasePlaywrightTest
             new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded, Timeout = 60_000 });
 
         var input = Page.Locator("#target");
-        await Expect(input).ToBeVisibleAsync();
+        await Assertions.Expect(input).ToBeVisibleAsync();
 
         // Click the input to focus it, then press Enter
         await input.ClickAsync();
         await input.PressAsync("Enter");
 
         // Wait for #result to show "ENTER" — the page updates it after keyup
-        await Expect(Page.Locator("#result"))
+        await Assertions.Expect(Page.Locator("#result"))
             .ToContainTextAsync("ENTER", new LocatorAssertionsToContainTextOptions { Timeout = 15_000 });
 
         // Press Tab and confirm the result updates
         await input.ClickAsync();
         await input.PressAsync("Tab");
-        await Expect(Page.Locator("#result"))
+        await Assertions.Expect(Page.Locator("#result"))
             .ToContainTextAsync("TAB", new LocatorAssertionsToContainTextOptions { Timeout = 15_000 });
 
         System.Console.WriteLine("✅ Keyboard shortcuts work");
@@ -121,12 +120,12 @@ public class AdvancedPlaywrightTests : BasePlaywrightTest
             new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded, Timeout = 60_000 });
 
         var images = Page.Locator(".figure");
-        await Expect(images.First).ToBeVisibleAsync();
+        await Assertions.Expect(images.First).ToBeVisibleAsync();
 
         await images.Nth(0).HoverAsync();
 
         var caption = images.Nth(0).Locator(".figcaption");
-        await Expect(caption).ToBeVisibleAsync(new LocatorAssertionsToBeVisibleOptions { Timeout = 10_000 });
+        await Assertions.Expect(caption).ToBeVisibleAsync(new LocatorAssertionsToBeVisibleOptions { Timeout = 10_000 });
 
         System.Console.WriteLine("✅ Mouse hover works");
     }
@@ -163,7 +162,7 @@ public class AdvancedPlaywrightTests : BasePlaywrightTest
         // Get the first actual file link (not a nav/header link)
         // The download page lists files inside a div.example > a
         var fileLinks = Page.Locator("div.example a");
-        await Expect(fileLinks.First).ToBeVisibleAsync();
+        await Assertions.Expect(fileLinks.First).ToBeVisibleAsync();
 
         // Use a longer timeout — the site can be slow
         var download = await Page.RunAndWaitForDownloadAsync(
@@ -191,12 +190,12 @@ public class AdvancedPlaywrightTests : BasePlaywrightTest
         await Page.GotoAsync("https://practicetestautomation.com/practice-test-login/",
             new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded, Timeout = 60_000 });
 
-        await Expect(Page.Locator("#username")).ToBeVisibleAsync();
+        await Assertions.Expect(Page.Locator("#username")).ToBeVisibleAsync();
         await Page.FillAsync("#username", "student");
         await Page.FillAsync("#password", "Password123");
         await Page.ClickAsync("#submit");
 
-        await Expect(Page.Locator(".post-title")).ToContainTextAsync("Logged In Successfully");
+        await Assertions.Expect(Page.Locator(".post-title")).ToContainTextAsync("Logged In Successfully");
 
         await Context.Tracing.StopAsync(new TracingStopOptions { Path = "trace.zip" });
 

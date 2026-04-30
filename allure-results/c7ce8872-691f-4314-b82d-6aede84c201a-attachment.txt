@@ -1,0 +1,3 @@
+✅ Browser started: Alert_ShouldAcceptJsAlert
+✅ Alert text was: I am a JS Alert
+🔚 Browser closed: Alert_ShouldAcceptJsAlert

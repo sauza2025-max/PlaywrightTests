@@ -5,6 +5,7 @@ using NUnit.Framework;
 using PlaywrightTests.Pages;
 using PlaywrightTests.Utils;
 using System.Threading.Tasks;
+using Microsoft.Playwright;  // ✅ brings in Assertions
 
 namespace PlaywrightTests.Tests;
 
@@ -23,7 +24,6 @@ namespace PlaywrightTests.Tests;
 [TestFixture]
 [AllureSuite("PlaywrightTest")]
 [Category("Login")]
-[AllureNUnit]
 public class LoginPlayTests : BasePlaywrightTest
 {
     private LoginPlayPage _loginPage = null!;
@@ -71,10 +71,10 @@ public class LoginPlayTests : BasePlaywrightTest
         await _loginPage.LoginAsync("student", "wrongpassword");
 
         // Playwright Expect: auto-retries until timeout
-        await Expect(Page.Locator("#error"))
+        await Assertions.Expect(Page.Locator("#error"))
             .ToBeVisibleAsync();
 
-        await Expect(Page.Locator("#error"))
+        await Assertions.Expect(Page.Locator("#error"))
             .ToContainTextAsync("Your password is invalid");
     }
 

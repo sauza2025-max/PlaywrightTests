@@ -1,9 +1,12 @@
+using Allure.Net.Commons;
 using Allure.NUnit;
 using AngleSharp.Dom;
 using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PlaywrightTests.Utils;
@@ -30,57 +33,26 @@ namespace PlaywrightTests.Utils;
 /// </summary>
 /// 
 [AllureNUnit]
-public class BasePlaywrightTest : PageTest
+public abstract class BasePlaywrightTest
 {
-    // PageTest (from Microsoft.Playwright.NUnit) gives us:
-    // - this.Page       → current browser page
-    // - this.Browser    → browser instance
-    // - this.Context    → browser context
-
     protected IPlaywright Playwright;
     protected IBrowser Browser;
     protected IPage Page;
+    protected IBrowserContext Context;    // ✅ add this
+
     protected string url = "https://automationexercise.com/login";
 
-    // ✅ Override browser launch options — raise default timeout for slow public test sites
-    //public override BrowserNewContextOptions ContextOptions()
-    //{
-    //    return new BrowserNewContextOptions
-    //    {
-    //        ViewportSize = new ViewportSize { Width = 1280, Height = 720 },
-    //        Locale       = "en-US",
-    //        // RecordVideoDir = "videos/" // Uncomment to record videos
-    //    };
-    //}
-
-    [SetUp]
-    public void SetDefaultTimeout()
-    {
-        // Raise global assertion + action timeout to 60s
-        // Public test sites (herokuapp, reqres.in) can be slow
-        Page.SetDefaultTimeout(60_000);
-        Page.SetDefaultNavigationTimeout(60_000);
-    }
-
-    // ✅ Helper: Take screenshot
-    protected async Task TakeScreenshotAsync(string name)
-    {
-        var path = $"screenshot_{name}_{DateTime.Now:yyyyMMdd_HHmmss}.png";
-        await Page.ScreenshotAsync(new PageScreenshotOptions { Path = path });
-        Console.WriteLine($"📸 Screenshot: {path}");
-    }
-
-    [OneTimeSetUp]
+    [OneTimeSetUp]                                    // ✅ runs once, sync — safe for Allure
     public void GlobalSetup()
     {
         TestEnvironment.WriteEnvironmentProperties("Chrome/Playwright");
     }
 
-    [SetUp]
+    [SetUp]                                           // ✅ runs per test, async
     public async Task BeforeTest()
     {
         Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
-        Browser = await Playwright.Chromium.LaunchAsync(new()
+        Browser = await Playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
         {
             Headless = true,
             Args = new[] { "--no-sandbox", "--disable-dev-shm-usage" }
@@ -90,10 +62,52 @@ public class BasePlaywrightTest : PageTest
         await Page.GotoAsync(url);
     }
 
-    [TearDown]
+    [TearDown]                                        // ✅ runs per test, async
     public async Task AfterTest()
     {
+        var status = TestContext.CurrentContext.Result.Outcome.Status;
+
+        if (status == TestStatus.Failed && Page != null)
+        {
+            try
+            {
+                var screenshotDir = Path.Combine(
+                    TestContext.CurrentContext.WorkDirectory, "screenshots"
+                );
+                Directory.CreateDirectory(screenshotDir);
+
+                var screenshotPath = Path.Combine(
+                    screenshotDir,
+                    $"{TestContext.CurrentContext.Test.Name}_{DateTime.Now:yyyyMMdd_HHmmss}.png"
+                );
+
+                await Page.ScreenshotAsync(new PageScreenshotOptions
+                {
+                    Path = screenshotPath,
+                    FullPage = false
+                });
+
+                AllureApi.AddAttachment(
+                    name: "Screenshot on failure",
+                    type: "image/png",
+                    path: screenshotPath
+                );
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Screenshot failed: {ex.Message}");
+            }
+        }
+
         await Browser.CloseAsync();
         Playwright.Dispose();
+    }
+
+    // ✅ Helper: Take screenshot
+    protected async Task TakeScreenshotAsync(string name)
+    {
+        var path = $"screenshot_{name}_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+        await Page.ScreenshotAsync(new PageScreenshotOptions { Path = path });
+        Console.WriteLine($"📸 Screenshot: {path}");
     }
 }

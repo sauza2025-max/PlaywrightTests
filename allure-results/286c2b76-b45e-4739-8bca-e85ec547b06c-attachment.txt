@@ -1,0 +1,2 @@
+✅ Browser started: Mouse_ShouldHoverOverElement
+🔚 Browser closed: Mouse_ShouldHoverOverElement

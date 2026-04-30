@@ -1,0 +1,3 @@
+✅ Browser started: Dropdown_ShouldSelectOptionByText
+✅ Dropdown selection works
+🔚 Browser closed: Dropdown_ShouldSelectOptionByText

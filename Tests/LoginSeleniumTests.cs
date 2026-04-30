@@ -20,17 +20,22 @@ namespace SeleniumTests.Tests;
 /// Valid credentials: student / Password123
 /// </summary>
 [TestFixture]
-[AllureSuite("SeleniumTests")]
+[AllureSuite("SeleniumTest")]
 [Category("Login")]
-[AllureNUnit]  // ← Must be on the concrete fixture class for Allure to capture results
 public class LoginSeleniumTests : BaseTest
 {
     private LoginSeleniumPage _loginPage = null!;
 
-    [SetUp]
-    public new void Setup()
+    //[SetUp]
+    //public void Setup()
+    //{
+    //    base.Setup();
+    //    _loginPage = new LoginSeleniumPage(Driver);
+    //    _loginPage.NavigateTo();
+    //}
+    [SetUp]                              // ✅ NUnit runs BaseTest.Setup() first
+    public void InitPage()               //    then this — no conflict
     {
-        base.Setup();
         _loginPage = new LoginSeleniumPage(Driver);
         _loginPage.NavigateTo();
     }
