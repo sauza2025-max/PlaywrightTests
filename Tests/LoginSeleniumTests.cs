@@ -20,7 +20,7 @@ namespace SeleniumTests.Tests;
 /// Valid credentials: student / Password123
 /// </summary>
 [TestFixture]
-[AllureSuite("Login")]
+[AllureSuite("SeleniumTests")]
 [Category("Login")]
 [AllureNUnit]  // ← Must be on the concrete fixture class for Allure to capture results
 public class LoginSeleniumTests : BaseTest

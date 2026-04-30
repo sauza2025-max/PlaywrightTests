@@ -1,4 +1,5 @@
 using Allure.NUnit;
+using Allure.NUnit.Attributes;
 using FluentAssertions;
 using Microsoft.Playwright;
 using NUnit.Framework;
@@ -16,7 +17,9 @@ namespace PlaywrightTests.Tests;
 /// so you can see the differences clearly.
 /// </summary>
 [TestFixture]
-[AllureNUnit]  // ← Must be on the concrete fixture class for Allure to capture results
+[AllureSuite("PlaywrightTest")]
+[Category("Login")]
+[AllureNUnit] // ← Must be on the concrete fixture class for Allure to capture results
 public class ComparisonTests : BasePlaywrightTest
 {
     /*
@@ -74,33 +77,6 @@ public class ComparisonTests : BasePlaywrightTest
         System.Console.WriteLine("✅ Playwright test passed");
     }
 
-    /*
-    // ✅ SELENIUM VERSION of the SAME test (for comparison)
-    // (Cannot run in this project - just for reference)
-
-    [Test]
-    public void Selenium_LoginTest()
-    {
-        // 1. Navigate
-        driver.Navigate().GoToUrl(
-            "https://practicetestautomation.com/practice-test-login/");
-
-        // 2. Find and fill fields (need to wait manually)
-        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        wait.Until(d => d.FindElement(By.Id("username"))).SendKeys("student");
-        driver.FindElement(By.Id("password")).SendKeys("Password123");
-
-        // 3. Click
-        driver.FindElement(By.Id("submit")).Click();
-
-        // 4. Assert (need explicit wait)
-        var title = wait.Until(d => d.FindElement(
-            By.CssSelector(".post-title"))).Text;
-        title.Should().Contain("Logged In Successfully");
-
-        System.Console.WriteLine("✅ Selenium test passed");
-    }
-    */
 
     // ✅ LOCATOR STRATEGIES COMPARISON
     [Test]

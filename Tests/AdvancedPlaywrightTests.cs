@@ -28,8 +28,9 @@ namespace PlaywrightTests.Tests;
 /// - Much faster test execution
 /// </summary>
 [TestFixture]
-[Category("Advanced")]
-[AllureNUnit]  // ← Must be on the concrete fixture class for Allure to capture results
+[AllureSuite("playwright")]
+[Category("Login")]
+[AllureNUnit]// ← Must be on the concrete fixture class for Allure to capture results
 public class AdvancedPlaywrightTests : BasePlaywrightTest
 {
     // ✅ TEST 1: Network interception - mock API response

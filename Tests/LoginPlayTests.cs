@@ -1,3 +1,4 @@
+using Allure.NUnit;
 using Allure.NUnit.Attributes;
 using FluentAssertions;
 using NUnit.Framework;
@@ -20,7 +21,9 @@ namespace PlaywrightTests.Tests;
 /// Playwright: await page.Locator("#x").ClickAsync();
 /// </summary>
 [TestFixture]
+[AllureSuite("PlaywrightTests")]
 [Category("Login")]
+[AllureNUnit]
 public class LoginPlayTests : BasePlaywrightTest
 {
     private LoginPlayPage _loginPage = null!;
