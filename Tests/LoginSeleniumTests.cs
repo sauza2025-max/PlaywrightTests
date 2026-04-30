@@ -2,7 +2,8 @@ using Allure.NUnit;
 using Allure.NUnit.Attributes;
 using FluentAssertions;
 using NUnit.Framework;
-using SeleniumTests.Pages;
+using PlaywrightTests.Pages;
+using PlaywrightTests.Utils;
 
 namespace SeleniumTests.Tests;
 
@@ -22,15 +23,15 @@ namespace SeleniumTests.Tests;
 [AllureSuite("Login")]
 [Category("Login")]
 [AllureNUnit]  // ← Must be on the concrete fixture class for Allure to capture results
-public class LoginTests : BaseTest
+public class LoginSeleniumTests : BaseTest
 {
-    private LoginPage _loginPage = null!;
+    private LoginSeleniumPage _loginPage = null!;
 
     [SetUp]
     public new void Setup()
     {
         base.Setup();
-        _loginPage = new LoginPage(Driver);
+        _loginPage = new LoginSeleniumPage(Driver);
         _loginPage.NavigateTo();
     }
 

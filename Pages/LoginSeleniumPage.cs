@@ -15,7 +15,7 @@ namespace SeleniumTests.Pages;
 ///
 /// TARGET: https://practicetestautomation.com/practice-test-login/
 /// </summary>
-public class LoginPage
+public class LoginSeleniumPage
 {
     private readonly IWebDriver _driver;
     private readonly WebDriverWait _wait;
@@ -27,7 +27,7 @@ public class LoginPage
     private readonly By _errorMessage  = By.Id("error");
     private readonly By _successMsg    = By.CssSelector(".post-title");
 
-    public LoginPage(IWebDriver driver)
+    public LoginSeleniumPage(IWebDriver driver)
     {
         Environment.SetEnvironmentVariable("PLAYWRIGHT_HTML_REPORT", "playwright-report");
         _driver = driver;
@@ -77,7 +77,7 @@ public class LoginPage
             {
                 var el = d.FindElement(_errorMessage);
                 var text = el.Text;
-                return (el.Displayed && !string.IsNullOrWhiteSpace(text)) ? text : null;
+                return el.Displayed && !string.IsNullOrWhiteSpace(text) ? text : null;
             }
             catch (StaleElementReferenceException)
             {
@@ -94,7 +94,7 @@ public class LoginPage
             {
                 var el = d.FindElement(_successMsg);
                 var text = el.Text;
-                return (el.Displayed && !string.IsNullOrWhiteSpace(text)) ? text : null;
+                return el.Displayed && !string.IsNullOrWhiteSpace(text) ? text : null;
             }
             catch (StaleElementReferenceException)
             {

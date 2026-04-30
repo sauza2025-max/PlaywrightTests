@@ -4,6 +4,7 @@ using Microsoft.Playwright;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using PlaywrightTests.Utils;
 using System.Threading.Tasks;
 
 namespace PlaywrightTests.Tests;

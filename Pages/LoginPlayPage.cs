@@ -15,7 +15,7 @@ namespace PlaywrightTests.Pages;
 ///
 /// TARGET: https://practicetestautomation.com/practice-test-login/
 /// </summary>
-public class LoginPage
+public class LoginPlayPage
 {
     private readonly IPage _page;
 
@@ -26,7 +26,7 @@ public class LoginPage
     private ILocator ErrorMessage  => _page.Locator("#error");
     private ILocator SuccessTitle  => _page.Locator(".post-title");
 
-    public LoginPage(IPage page) => _page = page;
+    public LoginPlayPage(IPage page) => _page = page;
 
     public async Task NavigateToAsync()
     {

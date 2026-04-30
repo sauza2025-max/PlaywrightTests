@@ -2,6 +2,7 @@ using Allure.NUnit.Attributes;
 using FluentAssertions;
 using NUnit.Framework;
 using PlaywrightTests.Pages;
+using PlaywrightTests.Utils;
 using System.Threading.Tasks;
 
 namespace PlaywrightTests.Tests;
@@ -20,14 +21,14 @@ namespace PlaywrightTests.Tests;
 /// </summary>
 [TestFixture]
 [Category("Login")]
-public class LoginTests : BasePlaywrightTest
+public class LoginPlayTests : BasePlaywrightTest
 {
-    private LoginPage _loginPage = null!;
+    private LoginPlayPage _loginPage = null!;
 
     [SetUp]
     public async Task SetupLogin()
     {
-        _loginPage = new LoginPage(Page);
+        _loginPage = new LoginPlayPage(Page);
         await _loginPage.NavigateToAsync();
     }
 

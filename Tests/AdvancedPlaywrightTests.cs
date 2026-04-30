@@ -3,6 +3,7 @@ using Allure.NUnit.Attributes;
 using FluentAssertions;
 using Microsoft.Playwright;
 using NUnit.Framework;
+using PlaywrightTests.Utils;
 using System;
 using System.Threading.Tasks;
 

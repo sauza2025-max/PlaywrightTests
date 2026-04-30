@@ -5,7 +5,7 @@ using NUnit.Framework;
 using System;
 using System.Threading.Tasks;
 
-namespace PlaywrightTests;
+namespace PlaywrightTests.Utils;
 
 /// <summary>
 /// 📚 PLAYWRIGHT BASE TEST
@@ -59,6 +59,6 @@ public class BasePlaywrightTest : PageTest
     {
         var path = $"screenshot_{name}_{DateTime.Now:yyyyMMdd_HHmmss}.png";
         await Page.ScreenshotAsync(new PageScreenshotOptions { Path = path });
-        System.Console.WriteLine($"📸 Screenshot: {path}");
+        Console.WriteLine($"📸 Screenshot: {path}");
     }
 }

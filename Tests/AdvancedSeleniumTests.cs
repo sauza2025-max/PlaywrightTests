@@ -5,6 +5,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using PlaywrightTests.Utils;
 using System;
 
 namespace SeleniumTests.Tests;
@@ -48,7 +49,7 @@ public class AdvancedSeleniumTests : BaseTest
         dropdown.SelectByValue("2");
         dropdown.SelectedOption.Text.Should().Be("Option 2");
 
-        System.Console.WriteLine("✅ Dropdown selection works");
+        Console.WriteLine("✅ Dropdown selection works");
     }
 
     // ✅ TEST 2: JavaScript Alert
@@ -67,7 +68,7 @@ public class AdvancedSeleniumTests : BaseTest
         alert.Accept();
 
         alertText.Should().Contain("I am a JS Alert");
-        System.Console.WriteLine($"✅ Alert text was: {alertText}");
+        Console.WriteLine($"✅ Alert text was: {alertText}");
     }
 
     // ✅ TEST 3: Confirm dialog - dismiss
@@ -108,7 +109,7 @@ public class AdvancedSeleniumTests : BaseTest
         body.Text.Should().Contain("Hello from inside the iframe!");
 
         Driver.SwitchTo().DefaultContent();
-        System.Console.WriteLine("✅ iFrame interaction works");
+        Console.WriteLine("✅ iFrame interaction works");
     }
 
     // ✅ TEST 5: Keyboard actions
@@ -165,7 +166,7 @@ public class AdvancedSeleniumTests : BaseTest
         var element = Driver.FindElement(By.TagName("h1"));
         js.ExecuteScript("arguments[0].style.border='3px solid red'", element);
 
-        System.Console.WriteLine($"✅ JS executed, page title: {title}");
+        Console.WriteLine($"✅ JS executed, page title: {title}");
     }
 
     // ✅ TEST 8: Explicit Wait - dynamic content
@@ -186,7 +187,7 @@ public class AdvancedSeleniumTests : BaseTest
         });
 
         finish!.Text.Should().Contain("Hello World!");
-        System.Console.WriteLine("✅ Dynamic element loaded successfully");
+        Console.WriteLine("✅ Dynamic element loaded successfully");
     }
 
     // ✅ TEST 9: Multiple windows/tabs

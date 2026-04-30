@@ -8,7 +8,7 @@ using System.IO;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
-namespace SeleniumTests;
+namespace PlaywrightTests.Utils;
 
 /// <summary>
 /// 📚 BASE TEST CLASS - All Selenium tests inherit from this
