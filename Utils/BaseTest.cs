@@ -1,7 +1,9 @@
+using AngleSharp.Dom;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using PlaywrightTests.Utils;
 using System;
 using System.IO;
 using WebDriverManager;
@@ -27,6 +29,7 @@ public class BaseTest
 {
     protected IWebDriver Driver = null!;
     protected WebDriverWait Wait = null!;
+    protected string url = "https://automationexercise.com/login";
 
     [SetUp]
     public void Setup()
@@ -48,9 +51,9 @@ public class BaseTest
         Driver = new ChromeDriver(options);
 
         // Page load timeout: abort if a page takes longer than 30s to load
-        Driver.Manage().Timeouts().PageLoad      = TimeSpan.FromSeconds(30);
+        Driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(30);
         // Implicit wait: retry FindElement for up to 5s before throwing
-        Driver.Manage().Timeouts().ImplicitWait  = TimeSpan.FromSeconds(5);
+        Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
         Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
 
@@ -103,4 +106,11 @@ public class BaseTest
         ((IJavaScriptExecutor)Driver)
             .ExecuteScript("arguments[0].scrollIntoView(true);", element);
     }
+
+    [OneTimeSetUp]
+    public void GlobalSetup()
+    {
+        TestEnvironment.WriteEnvironmentProperties("Chrome/Selenium");    // BaseTest
+    }
+
 }
